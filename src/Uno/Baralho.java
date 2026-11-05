@@ -41,14 +41,12 @@ public class Baralho {
 	public void embaralhar() {
 		Random random = new Random();
 
-		for (int i = 0; i < quantidade; i++) {
-			int posicaoAleatoria = random.nextInt(quantidade);
+		for (int i = quantidade - 1; i > 0; i--) {
+			int posicaoAleatoria = random.nextInt(i + 1);
 			
 			Carta temporaria = baralho[i];
 			baralho[i] = baralho[posicaoAleatoria];
-			baralho[posicaoAleatoria] = temporaria;
-			
-					
+			baralho[posicaoAleatoria] = temporaria;				
 		}
 	}
 	
@@ -61,6 +59,17 @@ public class Baralho {
 	public void adicionar(String cor,String valor) {
 		baralho[quantidade] = new Carta(cor, valor);
 		quantidade++;
+	}
+	
+	public Carta comprar() {
+		if (quantidade > 0) {			
+			Carta guardar = baralho[quantidade - 1];
+			baralho[quantidade - 1] = null;
+			quantidade--;
+			return guardar;
+		} else {
+			return null;			
+		}
 	}
 	
 	public int getQuantidade() {
